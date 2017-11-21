@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dribbble_client_id">2bf7b50c56cbc9b2a0b157c0a1a721a169fadfa460e7081cf0fd9e2787cab26d</string>
+    <string name="dribbble_client_secret">aaafe73844fad02fa36c1260a29721adf8199207883004fa6d38db45b5d28cc2</string>
+    <string name="dribbble_redirect_url">https://dribbble.com/</string>
+</resources>

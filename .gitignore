@@ -46,3 +46,5 @@ manifest-merger-production-release-report.txt
 # Properties
 secret.properties
 
+# key
+/app/src/main/res/values/keys.xml

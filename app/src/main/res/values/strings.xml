@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StackViewAppWidgetSample</string>
+
+    <string name="auth_success_message">Authorization is succeeded.</string>
+    <string name="auth_error_message">Authorization is failed. Try Again.</string>
+    <string name="auth_problem_message">Something went wrong. Try Again.</string>
 </resources>
