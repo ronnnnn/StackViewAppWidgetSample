@@ -3,7 +3,10 @@ package com.ronnnnn.stackviewappwidgetsample.data.remote
 import android.content.Context
 import com.ronnnnn.stackviewappwidgetsample.data.remote.auth.DribbbleOAuthApi
 import com.ronnnnn.stackviewappwidgetsample.data.remote.auth.DribbbleOAuthApiClient
+import com.ronnnnn.stackviewappwidgetsample.data.remote.shots.DribbbleShotsApi
+import com.ronnnnn.stackviewappwidgetsample.data.remote.shots.DribbbleShotsApiClient
 import com.ronnnnn.stackviewappwidgetsample.di.ForAuth
+import com.ronnnnn.stackviewappwidgetsample.di.ForGeneral
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -20,8 +23,15 @@ class AuthRemoteModule {
     fun provideDribbbleOAuthApi(context: Context, @ForAuth authRetrofit: Retrofit): DribbbleOAuthApi =
             DribbbleOAuthApiClient(context, authRetrofit)
 
+    @Singleton
+    @Provides
+    fun provideDribbbleShotsApi(@ForGeneral retrofit: Retrofit): DribbbleShotsApi =
+            DribbbleShotsApiClient(retrofit)
+
     interface Provider {
 
         fun dribbbleOAuthApi(): DribbbleOAuthApi
+
+        fun dribbbleShotsApi(): DribbbleShotsApi
     }
 }
