@@ -2,7 +2,6 @@ package com.ronnnnn.stackviewappwidgetsample.data.local.auth
 
 import android.content.SharedPreferences
 import io.reactivex.Completable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Singleton
 
 /**
@@ -20,5 +19,5 @@ class DribbbleOAuthPrefClient(private val sharedPreferences: SharedPreferences) 
                 sharedPreferences.edit()
                         .putString(KEY_ACCESS_TOKEN, accessToken)
                         .apply()
-            }.observeOn(Schedulers.io())
+            }
 }

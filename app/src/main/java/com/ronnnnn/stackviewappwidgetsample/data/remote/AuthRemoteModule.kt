@@ -1,5 +1,6 @@
 package com.ronnnnn.stackviewappwidgetsample.data.remote
 
+import android.content.Context
 import com.ronnnnn.stackviewappwidgetsample.data.remote.auth.DribbbleOAuthApi
 import com.ronnnnn.stackviewappwidgetsample.data.remote.auth.DribbbleOAuthApiClient
 import com.ronnnnn.stackviewappwidgetsample.di.ForAuth
@@ -16,8 +17,8 @@ class AuthRemoteModule {
 
     @Singleton
     @Provides
-    fun provideDribbbleOAuthApi(@ForAuth authRetrofit: Retrofit): DribbbleOAuthApi =
-            DribbbleOAuthApiClient(authRetrofit)
+    fun provideDribbbleOAuthApi(context: Context, @ForAuth authRetrofit: Retrofit): DribbbleOAuthApi =
+            DribbbleOAuthApiClient(context, authRetrofit)
 
     interface Provider {
 

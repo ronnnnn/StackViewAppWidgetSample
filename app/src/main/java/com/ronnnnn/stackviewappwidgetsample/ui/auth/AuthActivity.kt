@@ -37,7 +37,7 @@ class AuthActivity : AppCompatActivity(), AuthWebViewClient.Listener, AuthViewMo
             isHorizontalScrollBarEnabled = false
             settings.javaScriptEnabled = true
             webViewClient = AuthWebViewClient(this@AuthActivity)
-            loadUrl("${context.getString(R.string.dribbble_redirect_url)}oauth/authorize" +
+            loadUrl("${context.getString(R.string.dribbble_auth_end_point)}authorize" +
                     "?client_id=${context.getString(R.string.dribbble_client_id)}" +
                     "&scope=public+write")
         }

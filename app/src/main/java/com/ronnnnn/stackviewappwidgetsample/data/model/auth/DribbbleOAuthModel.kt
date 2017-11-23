@@ -6,6 +6,7 @@ import com.ronnnnn.stackviewappwidgetsample.data.local.auth.DribbbleOAuthDb
 import com.ronnnnn.stackviewappwidgetsample.data.remote.auth.DribbbleOAuthApi
 import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,10 +20,12 @@ class DribbbleOAuthModel @Inject constructor(
 ) {
 
     @CheckResult
-    fun registerCode(clientId: String, clientSecret: String, code: String): Single<RegisterCodeResponse> =
-            api.registerCode(clientId, clientSecret, code)
+    fun registerCode(code: String): Single<RegisterCodeResponse> =
+            api.registerCode(code)
+                    .subscribeOn(Schedulers.io())
 
     @CheckResult
     fun registerAccessToken(accessToken: String): Completable =
             db.registerAccessToken(accessToken)
+                    .subscribeOn(Schedulers.io())
 }

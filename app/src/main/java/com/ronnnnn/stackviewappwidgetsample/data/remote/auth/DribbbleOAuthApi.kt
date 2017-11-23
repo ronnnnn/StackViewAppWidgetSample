@@ -9,8 +9,6 @@ import io.reactivex.Single
 interface DribbbleOAuthApi {
 
     fun registerCode(
-            clientId: String,
-            clientSecret: String,
             code: String
     ): Single<RegisterCodeResponse>
 }

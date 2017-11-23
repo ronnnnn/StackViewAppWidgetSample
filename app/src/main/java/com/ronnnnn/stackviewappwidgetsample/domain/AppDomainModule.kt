@@ -1,6 +1,5 @@
 package com.ronnnnn.stackviewappwidgetsample.domain
 
-import android.content.Context
 import com.ronnnnn.stackviewappwidgetsample.data.model.auth.DribbbleOAuthModel
 import com.ronnnnn.stackviewappwidgetsample.domain.auth.RegisterCode
 import dagger.Module
@@ -13,8 +12,8 @@ import dagger.Provides
 class AppDomainModule {
 
     @Provides
-    fun provideRegisterCode(context: Context, dribbbleOAuthModel: DribbbleOAuthModel): RegisterCode =
-            RegisterCode(context, dribbbleOAuthModel)
+    fun provideRegisterCode(dribbbleOAuthModel: DribbbleOAuthModel): RegisterCode =
+            RegisterCode(dribbbleOAuthModel)
 
     interface Provider {
 

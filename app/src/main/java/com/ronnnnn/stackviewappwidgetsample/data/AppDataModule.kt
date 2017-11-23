@@ -2,6 +2,7 @@ package com.ronnnnn.stackviewappwidgetsample.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.ronnnnn.stackviewappwidgetsample.R
 import com.ronnnnn.stackviewappwidgetsample.data.model.AuthModelModule
 import com.ronnnnn.stackviewappwidgetsample.di.ForAuth
 import com.ronnnnn.stackviewappwidgetsample.di.ForGeneral
@@ -29,14 +30,6 @@ class AppDataModule {
     fun provideSharedPreferences(context: Context): SharedPreferences =
             context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-    @Provides
-    @ForGeneral
-    fun provideEndpoint(): String = "https://api.dribbble.com/v1/"
-
-    @Provides
-    @ForAuth
-    fun provideAuthEndpoint(): String = "https://dribbble.com/oauth/"
-
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient =
@@ -44,21 +37,23 @@ class AppDataModule {
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                     .build()
 
+    @Singleton
     @Provides
     @ForGeneral
-    fun provideRetrofit(@ForGeneral endpoint: String, client: OkHttpClient): Retrofit =
+    fun provideRetrofit(context: Context, client: OkHttpClient): Retrofit =
             Retrofit.Builder()
-                    .baseUrl(endpoint)
+                    .baseUrl(context.getString(R.string.dribbble_end_point))
                     .client(client)
                     .addConverterFactory(MoshiConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
 
+    @Singleton
     @Provides
     @ForAuth
-    fun provideAuthRetrofit(@ForAuth authEndpoint: String, client: OkHttpClient): Retrofit =
+    fun provideAuthRetrofit(context: Context, client: OkHttpClient): Retrofit =
             Retrofit.Builder()
-                    .baseUrl(authEndpoint)
+                    .baseUrl(context.getString(R.string.dribbble_auth_end_point))
                     .client(client)
                     .addConverterFactory(MoshiConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -67,12 +62,6 @@ class AppDataModule {
     interface Provider : AuthModelModule.Provider {
 
         fun sharedPreferences(): SharedPreferences
-
-        @ForGeneral
-        fun endpoint(): String
-
-        @ForAuth
-        fun authEndpoint(): String
 
         fun okHttpClient(): OkHttpClient
 
