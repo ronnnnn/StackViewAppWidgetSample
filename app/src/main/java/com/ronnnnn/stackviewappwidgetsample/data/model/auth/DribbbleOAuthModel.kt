@@ -28,4 +28,9 @@ class DribbbleOAuthModel @Inject constructor(
     fun registerAccessToken(accessToken: String): Completable =
             db.registerAccessToken(accessToken)
                     .subscribeOn(Schedulers.io())
+
+    @CheckResult
+    fun getAccessToken(): Single<String?> =
+            db.getAccessToken()
+                    .subscribeOn(Schedulers.io())
 }

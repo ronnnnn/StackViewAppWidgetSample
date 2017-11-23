@@ -3,6 +3,7 @@ package com.ronnnnn.stackviewappwidgetsample.data
 import android.content.Context
 import android.content.SharedPreferences
 import com.ronnnnn.stackviewappwidgetsample.R
+import com.ronnnnn.stackviewappwidgetsample.data.local.auth.DribbbleOAuthPrefClient
 import com.ronnnnn.stackviewappwidgetsample.data.model.AuthModelModule
 import com.ronnnnn.stackviewappwidgetsample.di.ForAuth
 import com.ronnnnn.stackviewappwidgetsample.di.ForGeneral
@@ -32,9 +33,17 @@ class AppDataModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient =
+    fun provideOkHttpClient(sharedPreferences: SharedPreferences): OkHttpClient =
             OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .addInterceptor { chain ->
+                        sharedPreferences.getString(DribbbleOAuthPrefClient.KEY_ACCESS_TOKEN, null).let {
+                            chain.request().newBuilder()
+                                    .addHeader("Authorization", "Bearer $it")
+                                    .build()
+                                    .let { chain.proceed(it) }
+                        }
+                    }
                     .build()
 
     @Singleton
