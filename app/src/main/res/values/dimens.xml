@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="appwidget_cell_size_1">40dp</dimen>
+    <dimen name="appwidget_cell_size_2">110dp</dimen>
+    <dimen name="appwidget_cell_size_3">180dp</dimen>
+    <dimen name="appwidget_cell_size_4">250dp</dimen>
+
+    <dimen name="appwidget_stack_view_item_padding">12dp</dimen>
+    <dimen name="appwidget_stack_view_item_info_margin_top">8dp</dimen>
+    <dimen name="appwidget_stack_view_item_icon_margin_end">4dp</dimen>
+    <dimen name="appwidget_stack_view_item_icon_margin_start">12dp</dimen>
+
+</resources>
