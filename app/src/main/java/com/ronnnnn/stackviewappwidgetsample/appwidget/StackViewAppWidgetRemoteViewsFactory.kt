@@ -1,7 +1,5 @@
 package com.ronnnnn.stackviewappwidgetsample.appwidget
 
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,10 +25,6 @@ class StackViewAppWidgetRemoteViewsFactory(
         private val checkLike: CheckLike
 ) : RemoteViewsService.RemoteViewsFactory {
 
-    private val appWidgetManager: AppWidgetManager by lazy {
-        AppWidgetManager.getInstance(context)
-    }
-
     private val remoteViewsList: ArrayList<RemoteViews> = ArrayList()
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -38,40 +32,34 @@ class StackViewAppWidgetRemoteViewsFactory(
         // no-op
     }
 
-    override fun getLoadingView(): RemoteViews? = null
-
-    override fun getItemId(position: Int): Long = position.toLong()
-
     override fun onDataSetChanged() {
         remoteViewsList.clear()
-        fetchShots()
+        fetchShotsAndCreateRemoteViews()
     }
-
-    override fun hasStableIds(): Boolean = true
-
-    override fun getViewAt(position: Int): RemoteViews = remoteViewsList[position]
 
     override fun getCount(): Int = remoteViewsList.size
 
     override fun getViewTypeCount(): Int = 1
+
+    override fun hasStableIds(): Boolean = true
+
+    override fun getLoadingView(): RemoteViews? = null
+
+    override fun getViewAt(position: Int): RemoteViews = remoteViewsList[position]
+
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun onDestroy() {
         remoteViewsList.clear()
         compositeDisposable.clear()
     }
 
-    private fun updateViews() {
-        val appWidgetComponentName = ComponentName(context.applicationContext, StackViewAppWidgetProvider::class.java)
-        val appWidgetIds = appWidgetManager.getAppWidgetIds(appWidgetComponentName)
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view)
-    }
-
-    private fun fetchShots() {
+    private fun fetchShotsAndCreateRemoteViews() {
         val disposable = getPopularShots.execute()
                 .flatMapPublisher { shots -> Flowable.fromIterable(shots) }
                 .flatMapSingle { shot ->
                     Single.zip<Shot, Boolean, RemoteViews>(Single.just(shot), checkLike.execute(shot.id), BiFunction { shot, isLiked ->
-                        RemoteViews(context.packageName, R.layout.item_appwidget_stack_view).apply {
+                        RemoteViews(context.packageName, R.layout.item_app_widget_stack_view).apply {
                             setShot(shot, isLiked)
                         }
                     })

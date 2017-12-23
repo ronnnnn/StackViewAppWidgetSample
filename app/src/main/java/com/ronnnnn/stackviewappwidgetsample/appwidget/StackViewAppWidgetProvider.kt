@@ -48,7 +48,7 @@ class StackViewAppWidgetProvider : AppWidgetProvider() {
                 data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
             }
 
-            RemoteViews(context.packageName, R.layout.appwidget_stack_view).apply {
+            RemoteViews(context.packageName, R.layout.app_widget_stack_view).apply {
                 setRemoteAdapter(R.id.stack_view, intent)
             }.let {
                 val clickIntent = Intent(context, StackViewAppWidgetProvider::class.java).apply {
