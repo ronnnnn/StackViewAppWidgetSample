@@ -5,6 +5,7 @@ import android.widget.RemoteViewsService
 import com.ronnnnn.stackviewappwidgetsample.App
 import com.ronnnnn.stackviewappwidgetsample.AppComponent
 import com.ronnnnn.stackviewappwidgetsample.di.ServiceScope
+import com.ronnnnn.stackviewappwidgetsample.domain.likes.CheckLike
 import com.ronnnnn.stackviewappwidgetsample.domain.shots.GetPopularShots
 import javax.inject.Inject
 
@@ -21,6 +22,8 @@ class StackViewAppWidgetService : RemoteViewsService() {
 
     @Inject
     lateinit var getPopularShots: GetPopularShots
+    @Inject
+    lateinit var checkLike: CheckLike
 
     override fun onCreate() {
         super.onCreate()
@@ -29,7 +32,11 @@ class StackViewAppWidgetService : RemoteViewsService() {
     }
 
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory =
-            StackViewAppWidgetRemoteViewsFactory(applicationContext, getPopularShots)
+            StackViewAppWidgetRemoteViewsFactory(
+                    applicationContext,
+                    getPopularShots,
+                    checkLike
+            )
 
     @ServiceScope
     @dagger.Component(dependencies = arrayOf(AppComponent::class))

@@ -1,7 +1,7 @@
 package com.ronnnnn.stackviewappwidgetsample.domain.auth
 
 import android.support.annotation.CheckResult
-import com.ronnnnn.stackviewappwidgetsample.data.model.auth.DribbbleOAuthModel
+import com.ronnnnn.stackviewappwidgetsample.model.auth.DribbbleOAuthModel
 import io.reactivex.Completable
 import javax.inject.Inject
 

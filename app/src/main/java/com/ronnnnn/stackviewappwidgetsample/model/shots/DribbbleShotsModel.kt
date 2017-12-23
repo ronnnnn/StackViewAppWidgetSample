@@ -1,4 +1,4 @@
-package com.ronnnnn.stackviewappwidgetsample.data.model.shots
+package com.ronnnnn.stackviewappwidgetsample.model.shots
 
 import android.support.annotation.CheckResult
 import com.ronnnnn.stackviewappwidgetsample.data.entity.Shot

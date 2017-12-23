@@ -1,4 +1,4 @@
-package com.ronnnnn.stackviewappwidgetsample.data.model.auth
+package com.ronnnnn.stackviewappwidgetsample.model.auth
 
 import android.support.annotation.CheckResult
 import com.ronnnnn.stackviewappwidgetsample.data.entity.auth.RegisterCodeResponse

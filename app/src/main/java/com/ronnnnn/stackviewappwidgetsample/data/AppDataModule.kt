@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.ronnnnn.stackviewappwidgetsample.R
 import com.ronnnnn.stackviewappwidgetsample.data.local.auth.DribbbleOAuthPrefClient
-import com.ronnnnn.stackviewappwidgetsample.data.model.AuthModelModule
 import com.ronnnnn.stackviewappwidgetsample.di.ForAuth
 import com.ronnnnn.stackviewappwidgetsample.di.ForGeneral
+import com.ronnnnn.stackviewappwidgetsample.model.AppModelModule
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 /**
  * Created by kokushiseiya on 2017/11/21.
  */
-@Module(includes = arrayOf(AuthModelModule::class))
+@Module(includes = arrayOf(AppModelModule::class))
 class AppDataModule {
 
     companion object {
@@ -68,7 +68,7 @@ class AppDataModule {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
 
-    interface Provider : AuthModelModule.Provider {
+    interface Provider : AppModelModule.Provider {
 
         fun sharedPreferences(): SharedPreferences
 

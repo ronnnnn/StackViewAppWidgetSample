@@ -2,7 +2,7 @@ package com.ronnnnn.stackviewappwidgetsample.domain.shots
 
 import android.support.annotation.CheckResult
 import com.ronnnnn.stackviewappwidgetsample.data.entity.Shot
-import com.ronnnnn.stackviewappwidgetsample.data.model.shots.DribbbleShotsModel
+import com.ronnnnn.stackviewappwidgetsample.model.shots.DribbbleShotsModel
 import io.reactivex.Single
 import javax.inject.Inject
 
